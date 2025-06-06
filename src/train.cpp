@@ -27,13 +27,11 @@ int Train::getLength() {
   Car* current = first;
   countOp = 0;
 
-  // 1. Включим свет в стартовом вагоне, если он выключен
   if (!current->light) {
     current->light = true;
   }
 
   while (true) {
-    // 2. Двигаемся вперёд, пока не встретим вагон с включённым светом
     int steps = 0;
     do {
       current = current->next;
@@ -41,16 +39,15 @@ int Train::getLength() {
       steps++;
     } while (!current->light);
 
-    // 3. Выключаем свет в этом вагоне
     current->light = false;
 
-    // 4. Возвращаемся назад на `steps` вагонов
+
     for (int i = 0; i < steps; ++i) {
       current = current->prev;
       countOp++;
     }
 
-    // 5. Если свет в текущем (стартовом) вагоне выключен — цикл завершён
+
     if (!current->light)
       return steps;
   }
